@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Administrator;
+use App\Models\User;
+use App\Models\UsersBlocked;
+use App\Models\UersWarned;
 use Validator;
+use Session;
 use Hash;
 
 
@@ -37,7 +41,22 @@ class AdminController extends Controller
                     ->withInput()
                     ->withErrors($validator);
         }
+
+        Session::put([
+            'admin_id' => $admin->id,
+            'uesrname' => $admin->username,
+        ]);
         
-        return view('admin/admin_home');
+        return redirect('/show-users');
+    }
+
+    public function showUsers(){
+        $usersAll=User::get();
+        // $users=User::where('deleted', '=', $deleted)->get(); // sa chi ashxatum
+
+        return view('admin/admin_home', [
+            'usersAll' => $usersAll,
+            'users' => $users,
+        ]);
     }
 }

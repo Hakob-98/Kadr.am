@@ -40,8 +40,6 @@ Route::get('/login', function () {
 
 Route::post('/do-login', [UserController::class,"doLogin"]);
 
-Route::get('/logout', [UserController::class,"logOut"]);
-
 Route::get('/restore-password', function(){
     return view('restore_password');
 });
@@ -60,8 +58,19 @@ Route::get('/show-password-form', function(){
 
 Route::post('/new-password', [UserController::class,"newPassword"]);
 
+Route::group(['middleware' => ['IsLogin']], function(){
+
+    Route::get('/logout', [UserController::class,"logOut"]);
+});
+
 Route::get('/change-admin', function(){
     return view('admin/admin');
 });
 
 Route::post('/check-artak', [AdminController::class,"checkArtak"]);
+
+Route::group(['middleware' => ['IsAdmin']], function(){
+
+    Route::get('/show-users', [AdminController::class,"showUsers"]);
+    
+});

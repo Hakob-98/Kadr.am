@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('country');
             $table->string('city');
             $table->tinyInteger('active')->nullable();
+            $table->tinyInteger('deleted')->nullable();
             $table->bigInteger('one_time_code')->nullable();
             $table->timestamps();
         });
