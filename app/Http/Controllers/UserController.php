@@ -81,9 +81,10 @@ class UserController extends Controller
 
         $validator->after(function ($validator) use ($user, $r) {
             if($user){
-                if($user->deleted == 1){
-                    $validator->errors()->add('email', 'Էլ․ հասցեն սխալ է։11111');
-                }elseif(!Hash::check($r->password, $user->password)){
+                /* if($user->deleted == 1){
+                    $validator->errors()->add('email', 'Էլ․ հասցեն սխալ է:');
+                }else */
+                if(!Hash::check($r->password, $user->password)){
                     $validator->errors()->add('password', 'Գաղտնաբառը սխալ է։');
                 } elseif(!$user->active){
                     $validator->errors()->add('active', 'Ձեր էջը ակտիվացված չէ, խնդրում ենք ստուգել Ձեր էլ․ հասցեն։');

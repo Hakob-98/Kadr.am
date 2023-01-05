@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Administrator;
 use App\Models\User;
-use App\Models\UsersBlocked;
-use App\Models\UersWarned;
+// use App\Models\UsersBlocked;
+// use App\Models\UsersWarned;
 use Validator;
 use Session;
 use Hash;
@@ -47,16 +47,60 @@ class AdminController extends Controller
             'uesrname' => $admin->username,
         ]);
         
-        return redirect('/show-users');
+        return redirect('/show-active-users');
     }
 
-    public function showUsers(){
-        $usersAll=User::get();
-        // $users=User::where('deleted', '=', $deleted)->get(); // sa chi ashxatum
+    public function showActiveUsers(){
+        $allUsers=User::get();
+        
+        return view('admin/active_users', [
+            'allUsers' => $allUsers,
+        ]);
+    }
 
-        return view('admin/admin_home', [
-            'usersAll' => $usersAll,
+    public function showWarnedUsers(){
+        $users=User::get();
+
+        return view('admin/warned_users', [
             'users' => $users,
         ]);
+    }
+
+    public function showBlockedUsers(){
+        $users=User::get();
+
+        return view('admin/blocked_users', [
+            'users' => $users,
+        ]);
+    }
+
+    public function showInactiveUsers(){
+        $users=User::get();
+
+        return view('admin/inactive_users', [
+            'users' => $users,
+        ]);
+    }
+
+    public function warnUser(Request $r){
+        $user=User::find($r->id);
+        $user->warned = 1;
+        $user->save();
+    }
+
+    public function blockUser(Request $r){
+        $user=User::find($r->id);
+        $user->blocked = 1;
+        $user->save();
+    }
+
+    public function deleteUser(Request $r){
+        $user=User::find($r->id);
+        $user->delete();
+    }
+
+    public function logOutAdmin(Request $r){
+        $r->session()->flush();
+        return redirect('/');
     }
 }

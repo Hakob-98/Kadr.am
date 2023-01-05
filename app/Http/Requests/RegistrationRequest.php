@@ -46,7 +46,10 @@ class RegistrationRequest extends FormRequest
             ],
             'phoneNumber' => [
                 'required',
-                'regex:/[+]374(91|96|99|43|33|77|93|94|98|49|55|95|41|44)-\d{2}-\d{2}-\d{2}/i'
+                'max:9',
+                // 'regex:/[+]374(91|96|99|43|33|77|93|94|98|49|55|95|41|44)-\d{2}-\d{2}-\d{2}/i',
+                // 'regex:/[+]374(91|96|99|43|33|77|93|94|98|49|55|95|41|44)\d{2}\d{2}\d{2}/i',
+                'regex:/0(91|96|99|43|33|77|93|94|98|49|55|95|41|44)\d{2}\d{2}\d{2}/i',
             ],
             'countries' => 'required',
             'cities' => 'required',
@@ -69,6 +72,7 @@ class RegistrationRequest extends FormRequest
             'comfPassword.same' => 'Գաղնաբառները չեն համընկնում',
             'phoneNumber.required' => 'Խնդրում ենք լրացնել բոլոր դաշտերը։',
             'phoneNumber.regex' => 'Խնդրում ենք լրացնել գործող հեռախոսահամար։',
+            'phoneNumber.max' => 'Խնդրում ենք լրացնել գործող հեռախոսահամար։',
             'countries.required' => 'Խնդրում ենք լրացնել բոլոր դաշտերը։',
             'cities.required' => 'Խնդրում ենք լրացնել բոլոր դաշտերը։',
         ];

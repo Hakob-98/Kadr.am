@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('users_deleted', function (Blueprint $table) {
             $table->id();
             $table->string('category_user');
             $table->string('first_name');
@@ -25,9 +25,8 @@ return new class extends Migration
             $table->string('gender');
             $table->string('country');
             $table->string('city');
-            $table->tinyInteger('active')->nullable();
-            $table->tinyInteger('deleted')->nullable();
-            $table->bigInteger('one_time_code')->nullable();
+            // $table->tinyInteger('active')->nullable();
+            // $table->bigInteger('one_time_code')->nullable();
             $table->timestamps();
         });
     }
@@ -39,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('users_deleted');
     }
 };

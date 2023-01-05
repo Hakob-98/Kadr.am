@@ -64,13 +64,29 @@ Route::group(['middleware' => ['IsLogin']], function(){
 });
 
 Route::get('/change-admin', function(){
-    return view('admin/admin');
+    return view('admin/admin_login');
 });
 
 Route::post('/check-artak', [AdminController::class,"checkArtak"]);
 
 Route::group(['middleware' => ['IsAdmin']], function(){
 
-    Route::get('/show-users', [AdminController::class,"showUsers"]);
+    Route::get('/show-active-users', [AdminController::class,"showActiveUsers"]);
+
+    Route::get('/show-warned-users', [AdminController::class,"showWarnedUsers"]);
+
+    Route::get('/show-blocked-users', [AdminController::class,"showBlockedUsers"]);
+
+    Route::get('/show-deleted-users', [AdminController::class,"showDeletedUsers"]);
+
+    Route::get('/show-inactive-users', [AdminController::class,"showInactiveUsers"]);
+
+    Route::post('/warn-user', [AdminController::class,"warnUser"]);
+
+    Route::post('/block-user', [AdminController::class,"blockUser"]);
+
+    Route::post('/delete-user', [AdminController::class,"deleteUser"]);
+
+    Route::get('/logout-admin', [AdminController::class,"logOutAdmin"]);
     
 });

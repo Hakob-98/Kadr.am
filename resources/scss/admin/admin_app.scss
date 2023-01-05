@@ -25,15 +25,13 @@
     border-radius: 15px;
 }
 
-// body {
-//     background: url('../../../public/images/admin/admin_bg.png') no-repeat center/cover;
-//     height: 100vh;
-//     transition: all 0.5s linear;
-// }
+body {
+    background-color: #b6cdce;
+}
 
 .adminNavbar{
-    border: 1px solid black;
-    padding: 30px;
+    padding: 20px;
+    background-color: #058187;
 
     .brand{
         display: flex;
@@ -45,7 +43,6 @@
     }
 
     .links{
-        border: 1px solid red;
         padding: 20px;
         display: flex;
         align-items: center;
